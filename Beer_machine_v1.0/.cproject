@@ -19,24 +19,6 @@
 							<builder buildPath="${workspace_loc:/Beer_machine_v1}/Release" id="io.sloeber.sketch.builder.1368091450" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="Arduino sketch builder" superClass="io.sloeber.sketch.builder"/>
 							<tool id="io.sloeber.tool.sketch.compiler.cpp.626108572" name="Arduino C++ Compiler" superClass="io.sloeber.tool.sketch.compiler.cpp">
 								<option id="io.sloeber.compiler.cpp.sketch.option.incpath.2044160858" name="Include Paths (-I)" superClass="io.sloeber.compiler.cpp.sketch.option.incpath" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Beer_machine_v1/core/core}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Beer_machine_v1/core/variant}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Beer_machine_v1/libraries/ADS1110}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Beer_machine_v1/libraries/ADS1110/utility}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Beer_machine_v1/libraries/DallasTemperature}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Beer_machine_v1/libraries/ESP8266WebServer}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Beer_machine_v1/libraries/ESP8266WebServer/src}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Beer_machine_v1/libraries/ESP8266WiFi}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Beer_machine_v1/libraries/ESP8266WiFi/src}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Beer_machine_v1/libraries/i2cdetect}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Beer_machine_v1/libraries/LiquidCrystal_PCF8574}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Beer_machine_v1/libraries/LiquidCrystal_PCF8574/src}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Beer_machine_v1/libraries/OLED_SSD1306_-_SH1106}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Beer_machine_v1/libraries/OLED_SSD1306_-_SH1106/src}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Beer_machine_v1/libraries/OneWire}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Beer_machine_v1/libraries/WiFi}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Beer_machine_v1/libraries/WiFi/src}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Beer_machine_v1/libraries/Wire}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Beer_machine_v1.0/core/core}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Beer_machine_v1.0/core/variant}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Beer_machine_v1.0/libraries/DallasTemperature}&quot;"/>
@@ -53,24 +35,6 @@
 							</tool>
 							<tool id="io.sloeber.tool.compiler.c.1127404012" name="Arduino C Compiler" superClass="io.sloeber.tool.compiler.c">
 								<option id="io.sloeber.compiler.c.sketch.option.incpath.1778525607" name="Include Paths (-I)" superClass="io.sloeber.compiler.c.sketch.option.incpath" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Beer_machine_v1/core/core}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Beer_machine_v1/core/variant}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Beer_machine_v1/libraries/ADS1110}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Beer_machine_v1/libraries/ADS1110/utility}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Beer_machine_v1/libraries/DallasTemperature}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Beer_machine_v1/libraries/ESP8266WebServer}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Beer_machine_v1/libraries/ESP8266WebServer/src}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Beer_machine_v1/libraries/ESP8266WiFi}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Beer_machine_v1/libraries/ESP8266WiFi/src}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Beer_machine_v1/libraries/i2cdetect}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Beer_machine_v1/libraries/LiquidCrystal_PCF8574}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Beer_machine_v1/libraries/LiquidCrystal_PCF8574/src}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Beer_machine_v1/libraries/OLED_SSD1306_-_SH1106}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Beer_machine_v1/libraries/OLED_SSD1306_-_SH1106/src}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Beer_machine_v1/libraries/OneWire}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Beer_machine_v1/libraries/WiFi}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Beer_machine_v1/libraries/WiFi/src}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Beer_machine_v1/libraries/Wire}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Beer_machine_v1.0/core/core}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Beer_machine_v1.0/core/variant}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Beer_machine_v1.0/libraries/DallasTemperature}&quot;"/>
@@ -87,24 +51,6 @@
 							</tool>
 							<tool id="io.sloeber.tool.sketch.compiler.s.206305842" name="Arduino Assembler" superClass="io.sloeber.tool.sketch.compiler.s">
 								<option id="io.sloeber.compiler.asm.sketch.option.incpath.1360292764" name="Include Paths (-I)" superClass="io.sloeber.compiler.asm.sketch.option.incpath" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Beer_machine_v1/core/core}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Beer_machine_v1/core/variant}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Beer_machine_v1/libraries/ADS1110}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Beer_machine_v1/libraries/ADS1110/utility}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Beer_machine_v1/libraries/DallasTemperature}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Beer_machine_v1/libraries/ESP8266WebServer}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Beer_machine_v1/libraries/ESP8266WebServer/src}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Beer_machine_v1/libraries/ESP8266WiFi}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Beer_machine_v1/libraries/ESP8266WiFi/src}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Beer_machine_v1/libraries/i2cdetect}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Beer_machine_v1/libraries/LiquidCrystal_PCF8574}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Beer_machine_v1/libraries/LiquidCrystal_PCF8574/src}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Beer_machine_v1/libraries/OLED_SSD1306_-_SH1106}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Beer_machine_v1/libraries/OLED_SSD1306_-_SH1106/src}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Beer_machine_v1/libraries/OneWire}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Beer_machine_v1/libraries/WiFi}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Beer_machine_v1/libraries/WiFi/src}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Beer_machine_v1/libraries/Wire}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Beer_machine_v1.0/core/core}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Beer_machine_v1.0/core/variant}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Beer_machine_v1.0/libraries/DallasTemperature}&quot;"/>
@@ -141,5 +87,10 @@
 	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
 	<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets"/>
-	<storageModule moduleId="refreshScope"/>
+	<storageModule moduleId="refreshScope" versionNumber="2">
+		<configuration configurationName="Release">
+			<resource resourceType="PROJECT" workspacePath="/Beer_machine_v1.0"/>
+		</configuration>
+	</storageModule>
+	<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
 </cproject>

@@ -322,21 +322,21 @@ void Automat_info()
 }
 void Motor_checking()
 {
-	if(motor_state.change && ((motor_state.time_ms+Delta_motor_milis)<millis()))
+	motor_state.ADS1110_value = ads1110.getData();
+	if((motor_state.time_ms+Delta_motor_milis)>millis()) return;
+	if(motor_state.change)
 	{
 		Set_PCF_port(0);
 		motor_state.change = false;
 	}
 	else
 	{
-		motor_state.ADS1110_value = ads1110.getData();
 		if(motor_state.state==Stop_engine_now)
 		{
-			if(motor_state.ADS1110_value>=Max_ok_signal) motor_state.name_state = "OK";
-			else
+			if(motor_state.ADS1110_value<Max_ok_signal)
 			{
 				motor_state.Error_flag = Error_Motor_current_on_stop;
-				motor_state.name_state = "STOP pr±d";
+				motor_state.name_state = "STOP prÄ…d";
 			}
 		}
 		else
@@ -344,15 +344,15 @@ void Motor_checking()
 			if(motor_state.ADS1110_value>=Max_ok_signal)
 			{
 				motor_state.Error_flag = Error_Motor_not_current;
-				motor_state.name_state = "Brak pr±du";
+				motor_state.name_state = "Brak prÄ…du";
 			}
 			else if(motor_state.ADS1110_value>=Max_revers_signal)
 			{
 				motor_state.name_state = "Odwrotny kierunek";
 			}
-			else motor_state.name_state = "OK";
 		}
 	}
+	if(!motor_state.Error_flag) motor_state.name_state = "OK";
 }
 //-------------------------------------//
 
@@ -404,8 +404,3 @@ void Clear_motor_Error_flag()
 	motor_state.Error_flag = 0;
 }
 //-------------------------------------//
-
-
-
-
-
