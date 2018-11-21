@@ -301,6 +301,11 @@ void Automat_info()
 	{
 		case Viwe_display_Text_ino:
 			Text_frame_Display();
+			Value_show_display(((float)Display_state_now.temperature)/100,
+									   Display_state_now.triac_state,
+									   Display_state_now.triac_power,
+									   Display_state_now.stage_name,
+									   Display_state_now.timer_procent);
 			break;
 		case Viwe_display_Error:
 			Error_viwe_show();

@@ -35,12 +35,12 @@
 #define Viwe_display_logo			4
 #define Low_engine_now				2
 #define High_engine_now				4
-#define Stop_engine_now				8
+#define Stop_engine_now				12
 
 //macro definitions
 #define Low_gear_engine	 	Set_PCF_port(2)
 #define High_gear_engine	Set_PCF_port(4)
-#define Stop_gear_engine	Set_PCF_port(8)
+#define Stop_gear_engine	Set_PCF_port(12)
 
 //add your function definitions for the project beer_machine here
 //common_function
