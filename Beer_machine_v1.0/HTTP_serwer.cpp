@@ -9,8 +9,11 @@
 //-------------------------------------//
 
 //-------- global variable area -------//
-const char *ssid = "Beer_machine";
+const char *ssid_station   = "STOR_PIKK";
+const char *passow_station = "Kutarate3000";
+const char *ssid_AP        = "Beer_machine";
 ESP8266WebServer server(80);
+IPAddress IP_station_adress;
 IPAddress IP_AP_state(10, 1, 1, 1);
 IPAddress IP_gateway_state(10, 1, 1, 1);
 IPAddress IP_mask_state(255, 255, 255, 0);
@@ -314,10 +317,36 @@ void handleNotFound()
 	server.send(200, "text/html", decode_msg);
 }
 
+
+
+void HTTP_serwer_softAP_start(const char* ssid_name, IPAddress IP_adress, IPAddress IP_gateway, IPAddress IP_mask)
+{
+	WiFi.enableAP(1);
+	WiFi.enableSTA(0);
+	WiFi.softAP(ssid_name);
+	WiFi.softAPConfig(IP_adress, IP_gateway, IP_mask);
+}
+
+char HTTP_serwer_Station_start(const char* network_name, const char* pass_to_network, IPAddress* Now_adress)
+{
+	WiFi.enableAP(0);
+	WiFi.enableSTA(1);
+	IPAddress IP_adress(0, 0, 0, 0);
+	WiFi.begin(network_name, pass_to_network);
+	for(char i=0; (WiFi.status() != WL_CONNECTED); i++)
+	{
+	   delay(500);
+	   if(i>25) return 0;
+	}
+	*Now_adress = WiFi.localIP();
+	return 1;
+}
+
 void HTTP_serwer_begine()
 {
-	WiFi.softAP(ssid);
-	WiFi.softAPConfig(IP_AP_state, IP_gateway_state, IP_mask_state);
+
+	if(HTTP_serwer_Station_start(ssid_station, passow_station, &IP_station_adress)==0)
+		HTTP_serwer_softAP_start(ssid_AP, IP_AP_state, IP_gateway_state, IP_mask_state);
 	server.on("/", handleRoot);
 	server.on("/msg", handleMeasurment);
 	server.onNotFound(handleNotFound);

@@ -29,6 +29,7 @@
 #define Error_Triak_not_insulation  0x10
 #define Error_Motor_not_current     0x20
 #define Error_Motor_current_on_stop 0x40
+#define Error_Motor_Revers			0x80
 #define Viwe_display_Text_ino		1
 #define Viwe_display_Error			2
 #define Viwe_display_value			3

@@ -353,6 +353,7 @@ void Motor_checking()
 			}
 			else if(motor_state.ADS1110_value>=Max_revers_signal)
 			{
+				motor_state.Error_flag = Error_Motor_Revers;
 				motor_state.name_state = "Odwrotny kierunek";
 			}
 		}

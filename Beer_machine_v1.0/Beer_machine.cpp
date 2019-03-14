@@ -7,10 +7,10 @@ void setup()
 // Add your initialization code here
 	UART_begine();
 	I2C_begine();
+	Start_logo_show();
 	T_measurement_begin();
 	HTTP_serwer_begine();
 	Triak_control_begin();
-	Start_logo_show();
 	Set_viwe_display(Viwe_display_Text_ino);
 }
 
