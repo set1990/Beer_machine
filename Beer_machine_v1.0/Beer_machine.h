@@ -82,6 +82,8 @@ void Set_Triak_Debugg_OFF(void);
 //HTTP serwer
 void HTTP_serwer_begine(void);
 void HTTP_serwer_handle(void);
+void HTTP_serwer_softAP_start(const char* ssid_name, IPAddress IP_adress, IPAddress IP_gateway, IPAddress IP_mask);
+char HTTP_serwer_Station_start(const char* network_name, const char* pass_to_network, IPAddress* Now_adress);
 //I2c (PCF and OLED)
 void I2C_begine(void);
 void Blink_display(const char quantity_blink=0);
