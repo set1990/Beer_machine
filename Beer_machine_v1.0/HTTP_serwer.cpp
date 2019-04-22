@@ -71,7 +71,7 @@ String Text =
 		"&nbsp;"
 		"<button onclick='window.location.href=`/repice`'>&nbsp;Receprury&nbsp;</button>"
 		"&nbsp;"
-		"<button disabled onclick='window.location.href=`/repice`'>Ustawienia sieci</button>"
+		"<button disabled onclick='window.location.href=`/network`'>Ustawienia sieci</button>"
 		"</ul>"
 		"<p></p>"
 		"<hr>"
@@ -302,7 +302,7 @@ String form =
 		"&nbsp;"
 		"<button onclick='window.location.href=`/repice`'>&nbsp;Receprury&nbsp;</button>"
 		"&nbsp;"
-		"<button onclick='window.location.href=`/repice`'>Ustawienia sieci</button>"
+		"<button onclick='window.location.href=`/repice`' disabled>Ustawienia sieci</button>"
 		"</ul>"
 		"<p></p>"
 		"<hr>"
@@ -325,7 +325,7 @@ String form =
 		"<hr>"
 		"<button type='submit' form='form1' value='Submit'>Akceptuj recepturê</button>"
 		"<hr>"
-		"<button disabled>Edytuj recepturê</button>"
+		"<button  onclick='window.location.href=`/repiceedit`' disabled>Edytuj recepturê</button>"
 		"<hr>"
 		"&nbsp;"
 		"<hr>"
@@ -355,7 +355,7 @@ String form =
 		"<form action='/repiceform' method='post' id='form1'>"
 		"<fieldset class='fieldset_navi' >"
 		"<legend>Etap 1</legend>"
-		"Nazwa:&nbsp;<input type='text' name='Nq1' size='15' value='nic'>"
+		"Nazwa:&nbsp;<input type='text' name='Nq1' size='15' value=''>"
 		"&ensp;&ensp; "
 		"Temperatura:&nbsp;<input type='number' name='Tq1' step='0.1' max='100' min='0' size='3' value='00.00'>"
 		"&#8451; "
@@ -363,7 +363,7 @@ String form =
 		"Czas:&nbsp;<input type='number' name='tmq1' size='2' min='0' max='60' value='00'><span style='font-size:90%;'> [m]</span>&nbsp;"
 		"<input type='number' name='tsq1' size='2' min='0' max='60' value='00'><span style='font-size:90%;'> [s]</span> <br>"
 		"</fieldset>";
-String msg_to_www_repice;
+String msg_to_www_repice = form ;
 //-------------------------------------//
 
 //------- core function area ----------//
@@ -431,7 +431,7 @@ void handleRepice()
 	String next_step =
 			"<fieldset class='fieldset_navi' >"
 			"<legend>Etap nr_etap</legend>"
-			"Nazwa:&nbsp;<input type='text' name='Nqnr_etap' size='15' value='nic'>"
+			"Nazwa:&nbsp;<input type='text' name='Nqnr_etap' size='15' value=''>"
 			"&ensp;&ensp; "
 			"Temperatura:&nbsp;<input type='number' name='Tqnr_etap' step='0.1' max='100' min='0' size='3' value='00.00'>"
 			"&#8451; "
@@ -439,22 +439,36 @@ void handleRepice()
 			"Czas:&nbsp;<input type='number' name='tmqnr_etap' size='2' min='0' max='60' value='00'><span style='font-size:90%;'> [m]</span>&nbsp;"
 			"<input type='number' name='tsqnr_etap' size='2' min='0' max='60' value='00'><span style='font-size:90%;'> [s]</span> <br>"
 			"</fieldset>";
-	msg_to_www_repice = form;
 	int quantity = (server.arg("quantity")).toInt();
-    if(quantity>4) quantity = 4;
-	for(int i=2; i<=quantity; i++)
-    {
-    	temp_next_step = next_step;
-    	temp_next_step.replace("nr_etap", String(i, DEC));
-    	msg_to_www_repice.concat(temp_next_step);
-    }
-	msg_to_www_repice.concat(end_www);
-	msg_to_www_repice.replace("input", "input disabled");
-    server.send(200, "text/html", msg_to_www_repice);
+	if(quantity!=0 || msg_to_www_repice==NULL)
+	{
+		msg_to_www_repice = form;
+		if(quantity>4) quantity = 4;
+		for(int i=2; i<=quantity; i++)
+		{
+			temp_next_step = next_step;
+			temp_next_step.replace("nr_etap", String(i, DEC));
+			msg_to_www_repice.concat(temp_next_step);
+		}
+		msg_to_www_repice.concat(end_www);
+	}
+	server.send(200, "text/html", msg_to_www_repice);
 }
 void handleRepice_form()
 {
-	Serial.println(server.arg("fname"));
+	msg_to_www_repice.replace("disabled>Edytuj", ">Edytuj");
+	msg_to_www_repice.replace("'Submit'>Akceptuj", "'Submit' disabled>Akceptuj");
+	msg_to_www_repice.replace("input", "input disabled");
+	msg_to_www_repice.replace("disabled>Uruchom", ">Uruchom");
+    server.send(200, "text/html", msg_to_www_repice);
+}
+void handleRepice_edit()
+{
+	msg_to_www_repice.replace(">Edytuj", "disabled>Edytuj");
+	msg_to_www_repice.replace("'Submit' disabled>Akceptuj", "'Submit'>Akceptuj");
+	msg_to_www_repice.replace("input disabled", "input");
+	msg_to_www_repice.replace(">Uruchom", "disabled>Uruchom");
+	server.send(200, "text/html", msg_to_www_repice);
 }
 void handleNotFound()
 {
@@ -475,6 +489,7 @@ void HTTP_serwer_begine()
 	server.on("/msg", handleMeasurment);
 	server.on("/repice", HTTP_GET, handleRepice);
 	server.on("/repiceform", HTTP_POST, handleRepice_form);
+	server.on("/repiceedit", handleRepice_edit);
 	server.onNotFound(handleNotFound);
 	server.begin();
 }
