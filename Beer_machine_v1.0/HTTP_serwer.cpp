@@ -12,6 +12,7 @@
 const char *ssid_station   = "STOR_PIKK";
 const char *passow_station = "Kutarate3000";
 const char *ssid_AP        = "Beer_machine";
+int quantity=1;
 ESP8266WebServer server(80);
 IPAddress IP_station_adress;
 IPAddress IP_AP_state(10, 1, 1, 1);
@@ -257,8 +258,7 @@ String nespepe =
 		"<hr>"
 		"Aktywno¶æ : &emsp; <b><span style='font-size:140%;'>repice_ON</span></b>"
 		"<hr>"
-		"Krok : &emsp; <b><span style='font-size:140%;'>repice_nr</span> Z "
-	 	"<span id='t_sec' style='font-size:140%;'>repice_quan</span></b>"
+		"Krok : &emsp; <b><span style='font-size:140%;'>repice_nr</span></b>"
 		"<hr>"
 		"</fieldset>"
 		"<br>"
@@ -285,6 +285,13 @@ String form =
 		"}"
 		"</style>"
 		"<script>"
+		"function make_control(order){"
+		"alert(order);"
+		"var xhttp = new XMLHttpRequest();"
+		"xhttp.open('GET', order, false);"
+		"xhttp.send();"
+		"alert(xhttp.responseText);"
+		"}"
 		"</script>"
 		"</head>"
 		"<body>"
@@ -329,23 +336,7 @@ String form =
 		"<hr>"
 		"&nbsp;"
 		"<hr>"
-		"<form action='/saverepice' method='get'>"
-		"<button type='submit' disabled>Zapisz do slotu recepturê</button>"
-		"<hr>"
-		"<button type='submit' formaction='/loadrepice' disabled>Wczytaj ze slotu recepturê</button>"
-		"<hr>"
-		"<select name='slots' disabled>"
-		"<option>Slot 1</option>"
-		"<option>Slot 2</option>"
-		"<option>Slot 3</option>"
-		"<option>Slot 4</option>"
-		"<option>Slot 5</option>"
-		"</select>"
-		"</form>"
-		"<hr>"
-		"&nbsp;"
-		"<hr>"
-		"<button disabled>Uruchom recepturê</button>"
+		"<button onclick='make_control(`/Set_Repice_ON`)' disabled>Uruchom recepturê</button>"
 		"<hr>"
 		"</fieldset>"
 		"</fieldset>"
@@ -355,13 +346,13 @@ String form =
 		"<form action='/repiceform' method='post' id='form1'>"
 		"<fieldset class='fieldset_navi' >"
 		"<legend>Etap 1</legend>"
-		"Nazwa:&nbsp;<input type='text' name='Nq1' size='15' value=''>"
+		"Nazwa:&nbsp;<input type='text' size='15' name='Nq1' value=''>"
 		"&ensp;&ensp; "
-		"Temperatura:&nbsp;<input type='number' name='Tq1' step='0.1' max='100' min='0' size='3' value='00.00'>"
+		"Temperatura:&nbsp;<input type='number' name='Tq1' value='00.00' step='0.1' max='100' min='0' size='3'>"
 		"&#8451; "
 		"&ensp;&ensp;"
-		"Czas:&nbsp;<input type='number' name='tmq1' size='2' min='0' max='60' value='00'><span style='font-size:90%;'> [m]</span>&nbsp;"
-		"<input type='number' name='tsq1' size='2' min='0' max='60' value='00'><span style='font-size:90%;'> [s]</span> <br>"
+		"Czas:&nbsp;<input type='number' name='tmq1' value='00' size='2' min='0' max='60'><span style='font-size:90%;'> [m]</span>&nbsp;"
+		"<input type='number' name='tsq1' value='00' size='2' min='0' max='60'><span style='font-size:90%;'> [s]</span> <br>"
 		"</fieldset>";
 String msg_to_www_repice = form ;
 //-------------------------------------//
@@ -418,9 +409,12 @@ void handleMeasurment()
 	temp2 = temp/60;
 	if(temp2>9) msg_to_www.replace("t_min_val", String(temp2, DEC));
 	else 		msg_to_www.replace("t_min_val", (String("0")+String(temp2, DEC)));
+	if(Get_Repice_ON()) msg_to_www.replace("repice_ON", "ON");
+	else    		    msg_to_www.replace("repice_ON", "OFF");
+	msg_to_www.replace("repice_nr", String(Get_Repice_step(), DEC));
 	server.send(200, "text/html", msg_to_www);
 }
-void handleRepice()
+void clear_repice()
 {
 	String temp_next_step;
 	String end_www =
@@ -431,16 +425,15 @@ void handleRepice()
 	String next_step =
 			"<fieldset class='fieldset_navi' >"
 			"<legend>Etap nr_etap</legend>"
-			"Nazwa:&nbsp;<input type='text' name='Nqnr_etap' size='15' value=''>"
+			"Nazwa:&nbsp;<input type='text' size='15' name='Nqnr_etap' value=''>"
 			"&ensp;&ensp; "
-			"Temperatura:&nbsp;<input type='number' name='Tqnr_etap' step='0.1' max='100' min='0' size='3' value='00.00'>"
+			"Temperatura:&nbsp;<input type='number' name='Tqnr_etap' value='00.00' step='0.1' max='100' min='0' size='3'>"
 			"&#8451; "
 			"&ensp;&ensp;"
-			"Czas:&nbsp;<input type='number' name='tmqnr_etap' size='2' min='0' max='60' value='00'><span style='font-size:90%;'> [m]</span>&nbsp;"
-			"<input type='number' name='tsqnr_etap' size='2' min='0' max='60' value='00'><span style='font-size:90%;'> [s]</span> <br>"
+			"Czas:&nbsp;<input type='number' name='tmqnr_etap' value='00' size='2' min='0' max='60'><span style='font-size:90%;'> [m]</span>&nbsp;"
+			"<input type='number' name='tsqnr_etap' value='00' size='2' min='0' max='60'><span style='font-size:90%;'> [s]</span> <br>"
 			"</fieldset>";
-	int quantity = (server.arg("quantity")).toInt();
-	if(quantity!=0 || msg_to_www_repice==NULL)
+	if(quantity!=0)
 	{
 		msg_to_www_repice = form;
 		if(quantity>4) quantity = 4;
@@ -452,15 +445,37 @@ void handleRepice()
 		}
 		msg_to_www_repice.concat(end_www);
 	}
+}
+void handleRepice()
+{
+	quantity = (server.arg("quantity")).toInt();
+	clear_repice();
 	server.send(200, "text/html", msg_to_www_repice);
 }
 void handleRepice_form()
 {
+	String Nq[quantity];
+	float Tq[quantity];
+	int tmq[quantity];
+	int tsq[quantity];
+	for(int i=0;i<quantity;i++)
+	{
+		Nq[i]  =  server.arg("Nq"+String(i+1));
+		Tq[i]  = (server.arg("Tq"+String(i+1))).toFloat();
+		tmq[i] = (server.arg("tmq"+String(i+1))).toInt();
+		tsq[i] = (server.arg("tsq"+String(i+1))).toInt();
+		msg_to_www_repice.replace("name='Nq"+String(i+1)+"' value=''", "name='Nq"+String(i+1)+"' value='"+Nq[i]+"'");
+		msg_to_www_repice.replace("name='Tq"+String(i+1)+"' value='00.00'", "name='Tq"+String(i+1)+"' value='"+String(Tq[i])+"'");
+		msg_to_www_repice.replace("name='tmq"+String(i+1)+"' value='00'", "name='tmq"+String(i+1)+"' value='"+String(tmq[i])+"'");
+		msg_to_www_repice.replace("name='tsq"+String(i+1)+"' value='00'", "name='tsq"+String(i+1)+"' value='"+String(tsq[i])+"'");
+	}
+	Repice_create(quantity, Tq, tmq, tsq, Nq);
+	Serial.println("dupa");
 	msg_to_www_repice.replace("disabled>Edytuj", ">Edytuj");
 	msg_to_www_repice.replace("'Submit'>Akceptuj", "'Submit' disabled>Akceptuj");
 	msg_to_www_repice.replace("input", "input disabled");
 	msg_to_www_repice.replace("disabled>Uruchom", ">Uruchom");
-    server.send(200, "text/html", msg_to_www_repice);
+	server.send(200, "text/html", msg_to_www_repice);
 }
 void handleRepice_edit()
 {
@@ -468,7 +483,9 @@ void handleRepice_edit()
 	msg_to_www_repice.replace("'Submit' disabled>Akceptuj", "'Submit'>Akceptuj");
 	msg_to_www_repice.replace("input disabled", "input");
 	msg_to_www_repice.replace(">Uruchom", "disabled>Uruchom");
+	Set_Repice_OFF();
 	server.send(200, "text/html", msg_to_www_repice);
+	clear_repice();
 }
 void handleNotFound()
 {

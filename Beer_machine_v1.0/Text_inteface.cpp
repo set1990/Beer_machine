@@ -244,6 +244,26 @@ inline String Call_function(String Function_name, String Arguments[6])
 		Set_stage_name_display(Arguments[3]);
 		return "OK";
 	}
+  //Recipe control
+	else if(Function_name.equalsIgnoreCase("Set_Repice_ON"))
+	{
+		Set_Repice_ON();
+		return "OK";
+	}
+	else if(Function_name.equalsIgnoreCase("Get_Repice_ON"))
+	{
+		if(Get_Repice_ON()) return "ON";
+						    return "OFF";
+	}
+	else if(Function_name.equalsIgnoreCase("Set_Repice_OFF"))
+	{
+		Set_Repice_OFF();
+		return "OK";
+	}
+	else if(Function_name.equalsIgnoreCase("Get_Repice_step"))
+	{
+		return String(Get_Repice_step());
+	}
 	return "Bledna nazwa";
 }
 String Decode_text_msg(String Text_msg)

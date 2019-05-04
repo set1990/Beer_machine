@@ -116,5 +116,12 @@ void Stop_Control_therm_Timer();
 void Set_Control_therm(float T);
 void Set_Control_therm_ON();
 void Set_Control_therm_OFF();
+//Recipe control
+void Repice_handle();
+void Repice_create(char step_quantity, float* step_therm, int* step_time_m, int* step_time_s, String* step_name);
+void Set_Repice_ON();
+bool Get_Repice_ON();
+void Set_Repice_OFF();
+int Get_Repice_step();
 //Do not add code below this line
 #endif /* _beer_machine_H_ */

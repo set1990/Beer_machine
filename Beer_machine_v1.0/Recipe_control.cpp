@@ -40,12 +40,13 @@ struct repise
 //-------- global variable area -------//
 repise* This_beer;
 bool Repice_ON;
+int step_cunter = 0;
 //-------------------------------------//
 
 //------- core function area ----------//
 void Repice_handle()
 {
-	static int step_cunter = 0;
+	/*
 	if(step_cunter>=This_beer->quantity)
 	{
 		Repice_ON = 0;
@@ -60,25 +61,49 @@ void Repice_handle()
 		Set_Control_therm_ON();
 		step_cunter++;
 	}
-}
-void Repice_create(char step_quantity, float* step_therm, int* step_time_m, int* step_time_s, String* step_name)
-{
-     struct repise beer(step_quantity);
-     for(int i=0;i<beer.quantity;i++)
-     {
-    	 beer.step->Therm_set  = step_therm[i];
-    	 beer.step->Time_set_m = step_time_m[i];
-    	 beer.step->Time_set_s = step_time_s[i];
-    	 beer.step->stage_name = step_name[i];
-     }
-     This_beer = &beer;
+	*/
+	if(Repice_ON)
+	{
+		for(int i=0;i<This_beer->quantity;i++)
+		{
+			Serial.println(This_beer->step[i].stage_name);
+			Serial.println(This_beer->step[i].Therm_set);
+			Serial.println(This_beer->step[i].Time_set_m);
+			Serial.println(This_beer->step[i].Time_set_s);
+		}
+		Repice_ON=0;
+	}
 }
 //-------------------------------------//
 
 //-------- interface function area ----//
+void Repice_create(char step_quantity, float* step_therm, int* step_time_m, int* step_time_s, String* step_name)
+{
+     static struct repise beer(step_quantity);
+     for(int i=0;i<beer.quantity;i++)
+     {
+    	 beer.step[i].Therm_set  = step_therm[i];
+    	 beer.step[i].Time_set_m = step_time_m[i];
+    	 beer.step[i].Time_set_s = step_time_s[i];
+    	 beer.step[i].stage_name = step_name[i];
+     }
+     This_beer = &beer;
+}
 void Set_Repice_ON()
 {
 	Repice_ON = 1;
+}
+void Set_Repice_OFF()
+{
+	Repice_ON = 0;
+}
+bool Get_Repice_ON()
+{
+	return(Repice_ON);
+}
+int Get_Repice_step()
+{
+	return(step_cunter+1);
 }
 //-------------------------------------//
 
