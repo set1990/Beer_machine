@@ -49,38 +49,18 @@ void Repice_handle()
 	if(This_beer == NULL) return;
 	if(step_cunter>=This_beer->quantity)
 	{
-		Serial.println("1");
 		Repice_ON = 0;
 		step_cunter=0;
 	}
 	if(Repice_ON==0) return;
 	if(Get_Control_therm_ON()==0)
 	{
-		Serial.println("2");
 		Set_Control_therm(This_beer->step[step_cunter].Therm_set);
-		Serial.println("3");
 		Set_t_Control_therm_Timer(This_beer->step[step_cunter].Time_set_m, This_beer->step[step_cunter].Time_set_s);
-		Serial.println("4");
 		Set_stage_name_display(This_beer->step[step_cunter].stage_name);
-		Serial.println("5");
 		Set_Control_therm_ON();
-		Serial.println("6");
 		step_cunter++;
-		Serial.println("7");
-		Serial.println(step_cunter);
 	}
-	/*
-	if(Repice_ON)
-	{
-		for(int i=0;i<This_beer->quantity;i++)
-		{
-			Serial.println(This_beer->step[i].stage_name);
-			Serial.println(This_beer->step[i].Therm_set);
-			Serial.println(This_beer->step[i].Time_set_m);
-			Serial.println(This_beer->step[i].Time_set_s);
-		}
-		Repice_ON=0;
-	}*/
 }
 //-------------------------------------//
 
