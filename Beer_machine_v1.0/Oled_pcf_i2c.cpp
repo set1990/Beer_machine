@@ -336,6 +336,7 @@ void Motor_checking()
 	}
 	else
 	{
+		if(motor_state.ADS1110_value == 0) return;
 		if(motor_state.state==Stop_engine_now)
 		{
 			if(motor_state.ADS1110_value<Max_ok_signal)

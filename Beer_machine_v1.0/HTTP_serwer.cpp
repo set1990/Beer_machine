@@ -101,7 +101,7 @@ String Text =
 		"<button onclick='make_control(`/High_gear_engine`)'>&ensp;HI&ensp;</button> "
 		"<button onclick='make_control(`/Stop_gear_engine`)'>STOP</button> "
 		"<hr>"
-		"&ensp;<button onclick='make_control(`/Clear_T_Error_flag`)'>Kasowanie B³êdu</button> "
+		"&ensp;<button onclick='make_control(`/Clear_motor_Error_flag`)'>Kasowanie B³êdu</button> "
 		"<hr>"
 		"</fieldset>"
 		"<br>"
@@ -470,7 +470,6 @@ void handleRepice_form()
 		msg_to_www_repice.replace("name='tsq"+String(i+1)+"' value='00'", "name='tsq"+String(i+1)+"' value='"+String(tsq[i])+"'");
 	}
 	Repice_create(quantity, Tq, tmq, tsq, Nq);
-	Serial.println("dupa");
 	msg_to_www_repice.replace("disabled>Edytuj", ">Edytuj");
 	msg_to_www_repice.replace("'Submit'>Akceptuj", "'Submit' disabled>Akceptuj");
 	msg_to_www_repice.replace("input", "input disabled");

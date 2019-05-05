@@ -28,6 +28,5 @@ void loop()
 	Control_therm();
 	Control_therm_Timer();
 	Repice_handle();
-	delay(10);
 }
 
